@@ -131,7 +131,7 @@ void Fork(void (*func)());
  */
 void Yield();
 
-void ReadInt();
+int ReadInt();
 void PrintInt(int number);
 char ReadChar();
 void PrintChar(char character);
