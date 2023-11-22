@@ -32,7 +32,7 @@ extern Timer *timer;				// the hardware alarm clock
 #ifdef USER_PROGRAM
 #include "machine.h"
 extern Machine* machine;	// user program memory and registers
-#include "synchocons.h"
+#include "synchcons.h"
 extern SynchConsole* gSynchConsole;
 #endif
 
