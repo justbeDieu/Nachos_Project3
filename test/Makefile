@@ -96,3 +96,9 @@ string.o: string.c
 string: string.o start.o
 	$(LD) $(LDFLAGS) start.o string.o -o string.coff
 	../bin/coff2noff string.coff string
+
+number.o: number.c
+	$(CC) $(CFLAGS) -c number.c
+number: number.o start.o
+	$(LD) $(LDFLAGS) start.o number.o -o number.coff
+	../bin/coff2noff number.coff number
