@@ -132,7 +132,7 @@ Yield:
 
 	.globl ReadChar
 	.ent	ReadChar
- ReadInt:
+ReadInt:
 	addiu $2, $0, SC_ReadInt
 	syscall
 	j	$31
