@@ -133,7 +133,7 @@ void Yield();
 
 void ReadInt();
 void PrintInt(int number);
-void ReadChar();
+char ReadChar();
 void PrintChar(char character);
 void ReadString(char buffer[], int length);
 void PrintString(char buffer[]);
