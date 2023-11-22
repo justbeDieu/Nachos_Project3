@@ -130,9 +130,6 @@ Yield:
 	j	$31
 	.end Yield
 
-	.globl ReadString
-	.ent ReadString
-
 	.globl ReadChar
 	.ent	ReadChar
 ReadChar:
@@ -149,6 +146,8 @@ PrintChar:
 	j	$31
 	.end PrintChar
 
+	.globl ReadString
+	.ent	ReadString
 ReadString:
 	addiu $2, $0, SC_ReadString
 	syscall
@@ -156,8 +155,7 @@ ReadString:
 	.end ReadString
 
 	.globl PrintString
-	.end PrintString
-
+	.ent	PrintString
 PrintString:
 	addiu $2, $0, SC_PrintString
 	syscall
