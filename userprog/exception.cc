@@ -24,6 +24,8 @@
 #include "copyright.h"
 #include "system.h"
 #include "syscall.h"
+#include <string>
+#include <string.h>
 
 #define MAX_INT32_LENGTH 512
 //----------------------------------------------------------------------
