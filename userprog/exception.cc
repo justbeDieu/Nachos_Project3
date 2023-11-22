@@ -115,6 +115,14 @@ ExceptionHandler(ExceptionType which)
                     DEBUG('a', "Shutdown, initiated by user program.\n");
                     interrupt->Halt();
                     break;
+                case SC_ReadChar:
+                    SysReadChar();
+                    IncreasePC();
+                    break;
+                case SC_PrintChar:
+                    SysPrintChar();
+                    IncreasePC();
+                    break;
                 case SC_ReadString:
                     int virtAddr, length;
                     char* buffer;
