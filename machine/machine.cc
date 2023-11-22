@@ -212,3 +212,39 @@ void Machine::WriteRegister(int num, int value)
 	registers[num] = value;
     }
 
+char* Machine::User2System(int virtAddr, int limit)
+{
+	int i; //chi so index
+	int oneChar;
+	char* kernelBuf = NULL;
+
+	kernelBuf = new char[limit + 1]; //can cho chuoi terminal
+	if (kernelBuf == NULL)
+		return kernelBuf;
+
+	memset(kernelBuf, 0, limit + 1);
+
+	for (i = 0; i < limit; i++)
+	{
+		machine->ReadMem(virtAddr + i, 1, &oneChar);
+		kernelBuf[i] = (char)oneChar;
+		if (oneChar == 0)
+			break;
+	}
+	return kernelBuf;
+}
+
+int Machine::System2User(int virtAddr,int len,char* buffer) {
+	if (len < 0) 
+		return -1;
+	if (len == 0)
+		return len;
+	int i = 0;
+	int oneChar = 0 ;
+	do {
+	oneChar= (int) buffer[i];
+	machine->WriteMem(virtAddr+i,1,oneChar);
+	++i;
+	} while(i < len && oneChar != 0);
+	return i;
+}
