@@ -109,7 +109,8 @@ class Machine {
     Machine(bool debug);	// Initialize the simulation of the hardware
 				// for running user programs
     ~Machine();			// De-allocate the data structures
-
+	char* User2System(int virtaddr, int limit);
+    int  System2User(int virtaddr, int len, char* buffer);
 // Routines callable by the Nachos kernel
     void Run();	 		// Run a user program
 
