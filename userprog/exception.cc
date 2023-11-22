@@ -25,7 +25,7 @@
 #include "system.h"
 #include "syscall.h"
 
-define MAX_INT32_LENGTH 512
+#define MAX_INT32_LENGTH 512
 //----------------------------------------------------------------------
 // ExceptionHandler
 // 	Entry point into the Nachos kernel.  Called when a user program
