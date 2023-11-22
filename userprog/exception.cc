@@ -271,9 +271,9 @@ void ExceptionHandler(ExceptionType which)
 				int addr = machine->ReadRegister(4); // Lay dia chi tham so buffer
 				int length = machine->ReadRegister(5); // Lay do dai toi da cua chuoi
 
-				char* buffer = User2System(addr, length); //Copy chuoi tu User Space sang System Space
+				char* buffer = machine->User2System(addr, length); //Copy chuoi tu User Space sang System Space
 				gSynchConsole->Read(buffer, length); // Goi ham Read cua SynchConsole de doc chuoi
-				System2User(addr, length, buffer); // Copy chuoi tu System Space sang User Space
+				machine->System2User(addr, length, buffer); // Copy chuoi tu System Space sang User Space
 
 				delete buffer; 
 				IncreasePC(); //yeu cau nachos tang program counter
@@ -282,7 +282,7 @@ void ExceptionHandler(ExceptionType which)
 			case SC_PrintString:
 			{
 				int addr = machine->ReadRegister(4); // Lay dia chi cua tham so buffer
-				char* buffer = User2System(addr, 255); // Copy chuoi tu User Space sang System Space voi kich thuoc 255
+				char* buffer = machine->User2System(addr, 255); // Copy chuoi tu User Space sang System Space voi kich thuoc 255
 				int length = 0;
 			
 				while (buffer[length] != 0) length++; // Dem do dai that cua chuoi
