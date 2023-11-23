@@ -6,7 +6,7 @@ int main()
 	// TT nhom
 	PrintString("\t THONG TIN THANH VIEN\n");
 
-	PrintString(" 21120221 - Huynh Phuc Dat\n");
+	PrintString(" 21120216 - Huynh Phuc Dat\n");
 	PrintString(" 21120221 - Son Bao Di\n");
 	PrintString(" 21120222 - Hoang Thi Dieu\n");
 	PrintString(" 21120238 - Nguyen Thu Ha\n");
