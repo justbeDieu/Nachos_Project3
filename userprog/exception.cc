@@ -311,7 +311,7 @@ void ExceptionHandler(ExceptionType which)
 				char* buffer = new char[MAX_BUFFER_SIZE]; 
 				int num = gSynchConsole->Read(buffer, length); 
 				buffer[num] = 0;
-				machine->System2User(address, num + 1, buffer);
+				machine->System2User(addr, num + 1, buffer);
 				delete buffer; 
 				IncreasePC(); 
 				break;
