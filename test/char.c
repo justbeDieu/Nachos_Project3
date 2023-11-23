@@ -3,9 +3,11 @@
 
 int main() 
 { 
-
- /*Read and print an char*/ 
-    char result = ReadChar();
+ /*Read and print a char*/ 
+    char result;
+    PrintString("Enter a character: ");
+    result = ReadChar();
+    PrintString("You entered: ");
     PrintChar(result);
     Halt(); 
 } 
