@@ -8,8 +8,8 @@ int main()
 	for (i = 32; i < 127; i++)
 	{
 		PrintInt(i);
-		PrintChar(":");
-		PrintChar(" ");
+		PrintChar(':');
+		PrintChar(' ');
 		c = (char)(i);
 		PrintChar(c);
 		PrintChar('\t');
