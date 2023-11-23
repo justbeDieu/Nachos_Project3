@@ -76,7 +76,7 @@ char: char.o start.o
 int.o: int.c
 	$(CC) $(CFLAGS) -c int.c
 int: int.o start.o
-	$(LD) $(LDFLAGS) int.o int.o -o int.coff
+	$(LD) $(LDFLAGS) start.o int.o -o int.coff
 	../bin/coff2noff int.coff int
 
 help.o: help.c
