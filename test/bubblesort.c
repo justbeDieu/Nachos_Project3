@@ -22,14 +22,14 @@ int main()
 
 	// Nhap mang
 	PrintString("Nhap mang:\n");
-	for (int i = 0; i < n; i++)
+	for (i = 0; i < n; i++)
 	{
 		arr[i] = ReadInt();
 	}
 
 	// Bubble sort
-	for (int i = 0; i < n; i++) {
-		for (int j = i + 1; j < n; j++) {
+	for (i = 0; i < n; i++) {
+		for ( j = i + 1; j < n; j++) {
 			if (arr[j] > arr[j + 1]) {
 				temp = arr[j];
 				arr[j] = arr[j + 1];
@@ -39,7 +39,7 @@ int main()
 	}
 
 	PrintString("In mang:\n");
-	for (int i = 0; i < n; i++)
+	for (i = 0; i < n; i++)
 	{
 		PrintInt(arr[i]);
 	}
