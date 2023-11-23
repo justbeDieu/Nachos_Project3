@@ -290,36 +290,18 @@ void ExceptionHandler(ExceptionType which)
 			}
 			case SC_ReadChar:
 			{
-				int maxBytes = 255;
-				char* buffer = new char[255];
-				int numBytes = gSynchConsole->Read(buffer, maxBytes);
-
-				if(numBytes > 1) 
-				{
-					printf("Chi duoc nhap duy nhat 1 ky tu!");
-					DEBUG('a', "\nERROR: Chi duoc nhap duy nhat 1 ky tu!");
-					machine->WriteRegister(2, 0);
-				}
-				else if(numBytes == 0)
-				{
-					printf("Ky tu rong!");
-					DEBUG('a', "\nERROR: Ky tu rong!");
-					machine->WriteRegister(2, 0);
-				}
-				else
-				{
-					
-					char c = buffer[0];
-					machine->WriteRegister(2, c);
-				}
-				delete buffer;
+				char input;
+				do
+					input=kernel->synchConsoleIn->GetChar();
+				while (input=='\n')
+				kernel->machine->WriteRegister(2,input);
 				IncreasePC(); 
 				break;
 			}
 			case SC_PrintChar:
 			{
 				char c = static_cast<char>(machine->ReadRegister(4)); 
-				gSynchConsole->Write(&c, 1); 
+				kernel->synchConsoleOut->PutChar(c);
 				IncreasePC(); 
 				break;
 			}
