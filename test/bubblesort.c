@@ -4,7 +4,7 @@
 int main()
 {
 	int arr[MAXSIZE];
-	int n, i, j, temp;
+	int n, i, j, temp, selection;
 	
 	// Nhap so luong phan tu
 	PrintString("Nhap do dai mang: ");
@@ -26,8 +26,12 @@ int main()
 	{
 		arr[i] = ReadInt();
 	}
-
-	// Bubble sort
+	
+	PrintString("Nhap 1 de sap xep tang dan, 0 de sap xep giam dan: ");
+	selection = ReadInt();
+	if (selection)
+	{
+	// Bubble sort ascending
 	for (i = 0; i < n - 1; i++) {
 		for ( j = 0; j < n - i -1; j++) {
 			if (arr[j] > arr[j+1]) {
@@ -37,7 +41,19 @@ int main()
 			}
 		}
 	}
-
+	} else
+	{
+		// Bubble sort descending
+	for (i = 0; i < n - 1; i++) {
+		for ( j = 0; j < n - i -1; j++) {
+			if (arr[j] < arr[j+1]) {
+				temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+		}
+	}
+	}
 	PrintString("In mang:\n");
 	for (i = 0; i < n; i++)
 	{
