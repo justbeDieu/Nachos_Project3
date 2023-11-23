@@ -150,7 +150,6 @@ void ExceptionHandler(ExceptionType which)
 			
 			for (int i = firstNumIndex; i < numbytes; i++)
 			{
-				//cac ki tu khac khong thuoc tu[0-->9]
 				if (buffer[i] < '0' || buffer[i] > '9')
 				{
 					printf("\n The integer number is not valid");
@@ -196,7 +195,7 @@ void ExceptionHandler(ExceptionType which)
 			}
 			
 			int checkMax[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 7 };
-			if (numbytes == 10 && !isNegative)//kiem tra so lon hon 2147483647	
+			if (numbytes == 10 && !isNegative)	
 			{
 				for (int i = firstNumIndex; i < numbytes; i++)
 				{
@@ -223,7 +222,6 @@ void ExceptionHandler(ExceptionType which)
 				number = number * 10 + (int)(buffer[i] - 48);
 			}
 
-			// neu la so am thi * -1;
 			if (isNegative)
 			{
 				number = number * -1;
