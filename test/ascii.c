@@ -8,13 +8,13 @@ int main()
 	for (i = 32; i < 127; i++)
 	{
 		PrintInt(i);
-		printChar(":");
-		printChar(" ");
+		PrintChar(":");
+		PrintChar(" ");
 		c = (char)(i);
 		PrintChar(c);
-		printChar("\t");
+		PrintChar("\t");
 		if (i % 8 == 0)
-			printChar("\n");
+			PrintChar("\n");
 	}
 	Halt();
 }
