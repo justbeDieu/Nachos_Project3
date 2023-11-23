@@ -135,10 +135,9 @@ void ExceptionHandler(ExceptionType which)
 				char* buffer;
 			int MAX_BUFFER = 255;
 			buffer = new char[MAX_BUFFER + 1];
-			int numbytes = gSynchConsole->Read(buffer, MAX_BUFFER);// doc buffer toi da MAX_BUFFER ki tu, tra ve so ki tu doc dc
+			int numbytes = gSynchConsole->Read(buffer, MAX_BUFFER);
 			int number = 0; // so luu ket qua tra ve cuoi cung
 			
-			/* Qua trinh chuyen doi tu buffer sang so nguyen int */
 			// Xac dinh so am hay so duong                       
 			bool isNegative = false; // Gia thiet la so duong.
 			int firstNumIndex = 0;
