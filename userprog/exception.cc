@@ -26,6 +26,7 @@
 #include "syscall.h"
 #include <string>
 #include <string.h>
+#include "synchconsole.h"
 
 //----------------------------------------------------------------------
 // ExceptionHandler
