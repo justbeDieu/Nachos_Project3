@@ -136,10 +136,10 @@ void ExceptionHandler(ExceptionType which)
 			int MAX_BUFFER = 255;
 			buffer = new char[MAX_BUFFER + 1];
 			int numbytes = gSynchConsole->Read(buffer, MAX_BUFFER);
-			int number = 0; // so luu ket qua tra ve cuoi cung
+			int number = 0;
 			
-			// Xac dinh so am hay so duong                       
-			bool isNegative = false; // Gia thiet la so duong.
+			           
+			bool isNegative = false; 
 			int firstNumIndex = 0;
 			if (buffer[0] == '-')
 			{
@@ -147,7 +147,7 @@ void ExceptionHandler(ExceptionType which)
 				firstNumIndex = 1;
 			}
 
-			// Kiem tra tinh hop le cua so nguyen buffer
+			
 			for (int i = firstNumIndex; i < numbytes; i++)
 			{
 				//cac ki tu khac khong thuoc tu[0-->9]
@@ -162,7 +162,7 @@ void ExceptionHandler(ExceptionType which)
 				}
 			}
 
-			if (numbytes > 11 || (numbytes == 11 && !isNegative))//int toi da 10 so va cong them 1 bien luu dau
+			if (numbytes > 11 || (numbytes == 11 && !isNegative))
 			{
 				printf("\n The number is overvalued int");
 				DEBUG('a', "\n The number is overvalued int");
@@ -172,8 +172,8 @@ void ExceptionHandler(ExceptionType which)
 				return;
 			}
 			int checkMin[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 8 };
-			//kiem tra xem co thuoc khoang -2147483648 to 2147483647	
-			if(numbytes == 11)//kiem tra so nho hon -2147483648	
+			
+			if(numbytes == 11)
 			{
 				
 				for (int i = firstNumIndex; i < numbytes; i++)
@@ -217,7 +217,7 @@ void ExceptionHandler(ExceptionType which)
 				}
 			}
 
-			// La so nguyen hop le, tien hanh chuyen chuoi ve so nguyen
+			
 			for (int i = firstNumIndex; i < numbytes; i++)
 			{
 				number = number * 10 + (int)(buffer[i] - 48);
@@ -236,7 +236,6 @@ void ExceptionHandler(ExceptionType which)
 			case SC_PrintInt: 
 			{
 			    int number = machine->ReadRegister(4);
-			//TH rieng number == -2147483648
 			if(number == -2147483648)
 			{
 				gSynchConsole->Write("-2147483648", 11);
@@ -245,43 +244,43 @@ void ExceptionHandler(ExceptionType which)
 			}
 			if (number == 0)
 			{
-				gSynchConsole->Write("0", 1); // In ra man hinh so 0
+				gSynchConsole->Write("0", 1); 
 				IncreasePC();
 				return;
 			}
 
-			/*Qua trinh chuyen so thanh chuoi de in ra man hinh*/
-			bool isNegative = false; // gia su la so duong
-			int N = 0; // Bien de luu so chu so cua number
+			
+			bool isNegative = false; 
+			int N = 0; 
 			int firstNumIndex = 0;
 
 			if (number < 0)
 			{
 				isNegative = true;
-				number = number * -1; // chuyen so am thanh duong
+				number = number * -1;
 				firstNumIndex = 1;
 			}
 
-			int temp = number; // bien tam luu number
-			while (temp > 0)//dem so chu so
+			int temp = number; 
+			while (temp > 0)
 			{
 				N++;
 				temp /= 10;
 			}
 
-			// Tao buffer chuoi de in ra man hinh
+			
 			char* buffer;
-			int MAX_BUFFER = 10;// so duong
+			int MAX_BUFFER = 10;
 			if (isNegative)
-				MAX_BUFFER = 11;// so am
+				MAX_BUFFER = 11;
 			buffer = new char[MAX_BUFFER];
-			//chuyen tung  ki tu so vao trong mang buffer bat dau tu don vi
+			
 			for (int i = firstNumIndex + N - 1; i >= firstNumIndex; i--)
 			{
 				buffer[i] = (char)((number % 10) + 48);
 				number /= 10;
 			}
-			if (isNegative)//kiem tra co phai so am hay khong
+			if (isNegative)
 			{
 				buffer[0] = '-';
 				N++;
@@ -297,13 +296,13 @@ void ExceptionHandler(ExceptionType which)
 				char* buffer = new char[255];
 				int numBytes = gSynchConsole->Read(buffer, maxBytes);
 
-				if(numBytes > 1) //Neu nhap nhieu hon 1 ky tu thi khong hop le
+				if(numBytes > 1) 
 				{
 					printf("Chi duoc nhap duy nhat 1 ky tu!");
 					DEBUG('a', "\nERROR: Chi duoc nhap duy nhat 1 ky tu!");
 					machine->WriteRegister(2, 0);
 				}
-				else if(numBytes == 0) //Ky tu rong
+				else if(numBytes == 0)
 				{
 					printf("Ky tu rong!");
 					DEBUG('a', "\nERROR: Ky tu rong!");
@@ -311,50 +310,49 @@ void ExceptionHandler(ExceptionType which)
 				}
 				else
 				{
-					//Chuoi vua lay co dung 1 ky tu, lay ky tu o index = 0, return vao thanh ghi R2
+					
 					char c = buffer[0];
 					machine->WriteRegister(2, c);
 				}
 				delete buffer;
-				IncreasePC(); //yeu cau nachos tang program counter
+				IncreasePC(); 
 				break;
 			}
 			case SC_PrintChar:
 			{
-				char c = static_cast<char>(machine->ReadRegister(4)); // Doc ki tu tu thanh ghi r4
-				gSynchConsole->Write(&c, 1); // In ky tu tu bien c, 1 byte
-				IncreasePC(); //yeu cau nachos tang program counter
+				char c = static_cast<char>(machine->ReadRegister(4)); 
+				gSynchConsole->Write(&c, 1); 
+				IncreasePC(); 
 				break;
 			}
 			case SC_ReadString:
 			{
-				int addr = machine->ReadRegister(4); // Lay dia chi tham so buffer
-				int length = machine->ReadRegister(5); // Lay do dai toi da cua chuoi
+				int addr = machine->ReadRegister(4); 
+				int length = machine->ReadRegister(5); 
 
-				char* buffer = machine->User2System(addr, length); //Copy chuoi tu User Space sang System Space
-				gSynchConsole->Read(buffer, length); // Goi ham Read cua SynchConsole de doc chuoi
-				machine->System2User(addr, length, buffer); // Copy chuoi tu System Space sang User Space
-
+				char* buffer = machine->User2System(addr, length); 
+				gSynchConsole->Read(buffer, length); 
+				machine->System2User(addr, length, buffer); 
 				delete buffer; 
-				IncreasePC(); //yeu cau nachos tang program counter
+				IncreasePC(); 
 				break;
 			}
 			case SC_PrintString:
 			{
-				int addr = machine->ReadRegister(4); // Lay dia chi cua tham so buffer
-				char* buffer = machine->User2System(addr, 255); // Copy chuoi tu User Space sang System Space voi kich thuoc 255
+				int addr = machine->ReadRegister(4); 
+				char* buffer = machine->User2System(addr, 255); 
 				int length = 0;
 			
-				while (buffer[length] != 0) length++; // Dem do dai that cua chuoi
-				gSynchConsole->Write(buffer, length + 1); // Goi ham Write cua SynchConsole de in chuoi
+				while (buffer[length] != 0) length++; 
+				gSynchConsole->Write(buffer, length + 1); 
 
 				delete buffer;
-				IncreasePC(); //yeu cau nachos tang program counter
+				IncreasePC(); 
 				break;
 			}
 			default:
 			{ 
-				//printf("Unexpected user mode exception %d %d\n", which, type);
+				
 				IncreasePC();
 				break;
 			}
