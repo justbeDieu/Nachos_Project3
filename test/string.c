@@ -7,7 +7,7 @@
 int main() {
 
     char str[256];
-    /PrintString("Enter string length (<=255): ");
+    PrintString("Enter string length (<=255): ");
     ReadString(str, ReadNum());
     PrintString("You entered: ");
     PrintString(str);
