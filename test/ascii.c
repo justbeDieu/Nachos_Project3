@@ -12,9 +12,9 @@ int main()
 		PrintChar(" ");
 		c = (char)(i);
 		PrintChar(c);
-		PrintChar("\t");
+		PrintChar('\t');
 		if (i % 8 == 0)
-			PrintChar("\n");
+			PrintChar('\n');
 	}
 	Halt();
 }
