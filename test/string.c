@@ -3,12 +3,14 @@
 */
 
 #include "syscall.h"
-
 int main() {
-
     char str[256];
+    int length;
+
     PrintString("Enter string length (<=255): ");
-    ReadString(str, ReadInt());
+    length = ReadInt();
+    PrintString("Enter string: ");
+    ReadString(str, length);
     PrintString("You entered: ");
     PrintString(str);
     Halt();
