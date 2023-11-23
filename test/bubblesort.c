@@ -27,9 +27,9 @@ int main()
 		arr[i] = ReadInt();
 	}
 	
-	PrintString("Nhap 1 de sap xep tang dan: ");
+	PrintString("Nhap 1 de sap xep tang dan, 0 de sap xep giam dan: ");
 	selection = ReadInt();
-	if (selection)
+	if (selection==1)
 	{
 	// Bubble sort ascending
 	for (i = 0; i < n - 1; i++) {
@@ -41,7 +41,7 @@ int main()
 			}
 		}
 	}
-	} else
+	} else if (selection==0)
 	{
 		// Bubble sort descending
 	for (i = 0; i < n - 1; i++) {
@@ -53,7 +53,8 @@ int main()
 			}
 		}
 	}
-	}
+	} else
+		PrintString("Lua chon khong phu hop!\n");
 	PrintString("In mang:\n");
 	for (i = 0; i < n; i++)
 	{
