@@ -19,7 +19,7 @@ int main()
 	PrintString(" Chay lenh:\n\t .userprog/nachos -rs 1023 -x /test/ascii\n\n");
 
 	PrintString(" Chuong trinh sort:\n");
-	PrintString(" Nhap so luong phan tu va phap tung phan tu\n");
+	PrintString(" Nhap so luong phan tu, nhap tung phan tu và thu tu sap xep\n");
 	PrintString(" Chay lenh:\n\t .userprog/nachos -rs 1023 -x /test/bubblesort\n\n");
 	
 	Halt();
