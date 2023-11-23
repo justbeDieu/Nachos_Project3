@@ -27,7 +27,7 @@ int main()
 		arr[i] = ReadInt();
 	}
 	
-	PrintString("Nhap 1 de sap xep tang dan, 0 de sap xep giam dan: ");
+	PrintString("Nhap 1 de sap xep tang dan: ");
 	selection = ReadInt();
 	if (selection)
 	{
