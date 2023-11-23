@@ -294,8 +294,8 @@ void ExceptionHandler(ExceptionType which)
 				char* input = new char;
 				do
 					gSynchConsole->Read(input,1);
-				while ((*input)=='\n')
-				kernel->machine->WriteRegister(2,*input);
+				while ((*input)=='\n');
+				machine->WriteRegister(2,*input);
 				IncreasePC(); 
 				break;
 			}
