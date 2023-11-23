@@ -26,7 +26,8 @@
 #include "syscall.h"
 #include <string>
 #include <string.h>
-
+#define MAX_INT32_LENGTH 512 
+#define MAX_BUFFER_SIZE	512
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -311,9 +312,10 @@ void ExceptionHandler(ExceptionType which)
 				int addr = machine->ReadRegister(4); 
 				int length = machine->ReadRegister(5); 
 
-				char* buffer = machine->User2System(addr, length); 
-				gSynchConsole->Read(buffer, length); 
-				machine->System2User(addr, length, buffer); 
+				char* buffer = new char[MAX_BUFFER_SIZE]; 
+				int num = gSynchConsole->Read(buffer, length); 
+				buffer[num] = 0;
+				machine->System2User(address, num + 1, buffer);
 				delete buffer; 
 				IncreasePC(); 
 				break;
