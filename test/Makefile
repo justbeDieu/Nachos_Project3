@@ -66,6 +66,7 @@ matmult: matmult.o start.o
 	$(LD) $(LDFLAGS) start.o matmult.o -o matmult.coff
 	../bin/coff2noff matmult.coff matmult
 
+
 char.o: char.c
 	$(CC) $(CFLAGS) -c char.c
 char: char.o start.o
