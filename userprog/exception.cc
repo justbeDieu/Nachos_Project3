@@ -129,109 +129,105 @@ void ExceptionHandler(ExceptionType which)
 			case SC_Halt: 
 			{
 			    DEBUG('a', "Shutdown, initiated by user program.\n");
-	   	        interrupt->Halt();
-		        break;
-        	}
+		  	 	interrupt->Halt();
+			    break;
+	        }
 			case SC_ReadInt: 
 			{
 				char* buffer;
-			int MAX_BUFFER = 255;
-			buffer = new char[MAX_BUFFER + 1];
-			int numbytes = gSynchConsole->Read(buffer, MAX_BUFFER);
-			int number = 0;
-			
-			           
-			bool isNegative = false; 
-			int firstNumIndex = 0;
-			if (buffer[0] == '-')
-			{
-				isNegative = true;
-				firstNumIndex = 1;
-			}
-
-			
-			for (int i = firstNumIndex; i < numbytes; i++)
-			{
-				if (buffer[i] < '0' || buffer[i] > '9')
+				int MAX_BUFFER = 255;
+				buffer = new char[MAX_BUFFER + 1];
+				int numbytes = gSynchConsole->Read(buffer, MAX_BUFFER);
+				int number = 0;
+				
+				           
+				bool isNegative = false; 
+				int firstNumIndex = 0;
+				if (buffer[0] == '-')
 				{
-					printf("\n The integer number is not valid");
-					DEBUG('a', "\n The integer number is not valid");
+					isNegative = true;
+					firstNumIndex = 1;
+				}
+				for (int i = firstNumIndex; i < numbytes; i++)
+				{
+					if (buffer[i] < '0' || buffer[i] > '9')
+					{
+						printf("\n The integer number is not valid");
+						DEBUG('a', "\n The integer number is not valid");
+						machine->WriteRegister(2, number);
+						IncreasePC();
+						delete buffer;
+						return;
+					}
+				}
+
+				if (numbytes > 11 || (numbytes == 11 && !isNegative))
+				{
+					printf("\n The number is overvalued int");
+					DEBUG('a', "\n The number is overvalued int");
 					machine->WriteRegister(2, number);
 					IncreasePC();
 					delete buffer;
 					return;
 				}
-			}
-
-			if (numbytes > 11 || (numbytes == 11 && !isNegative))
-			{
-				printf("\n The number is overvalued int");
-				DEBUG('a', "\n The number is overvalued int");
+				int checkMin[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 8 };
+			
+				if(numbytes == 11)
+				{
+					
+					for (int i = firstNumIndex; i < numbytes; i++)
+					{
+						int temp = (int)(buffer[i] - 48);
+						if (temp == checkMin[i - 1]) {
+							continue;
+						}
+						else if (temp > checkMin[i - 1]) {
+							printf("\n\n The number is overvalued int");
+							DEBUG('a', "\n The number is overvalued int");
+							machine->WriteRegister(2, number);
+							IncreasePC();
+							delete buffer;
+							return;
+						}
+						else
+							break;
+					}
+				}
+				
+				int checkMax[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 7 };
+				if (numbytes == 10 && !isNegative)	
+				{
+					for (int i = firstNumIndex; i < numbytes; i++)
+					{
+						int temp = (int)(buffer[i] - 48);
+						if (temp == checkMax[i]) {
+							continue;
+						}
+						else if (temp > checkMax[i]) {
+							printf("\n\n The number is overvalued int");
+							DEBUG('a', "\n The number is overvalued int");
+							machine->WriteRegister(2, number);
+							IncreasePC();
+							delete buffer;
+							return;
+						}
+						else
+							break;
+					}
+				}
+				for (int i = firstNumIndex; i < numbytes; i++)
+				{
+					number = number * 10 + (int)(buffer[i] - 48);
+				}
+	
+				if (isNegative)
+				{
+					number = number * -1;
+				}
 				machine->WriteRegister(2, number);
 				IncreasePC();
 				delete buffer;
 				return;
-			}
-			int checkMin[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 8 };
-			
-			if(numbytes == 11)
-			{
-				
-				for (int i = firstNumIndex; i < numbytes; i++)
-				{
-					int temp = (int)(buffer[i] - 48);
-					if (temp == checkMin[i - 1]) {
-						continue;
-					}
-					else if (temp > checkMin[i - 1]) {
-						printf("\n\n The number is overvalued int");
-						DEBUG('a', "\n The number is overvalued int");
-						machine->WriteRegister(2, number);
-						IncreasePC();
-						delete buffer;
-						return;
-					}
-					else
-						break;
-				}
-			}
-			
-			int checkMax[] = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 7 };
-			if (numbytes == 10 && !isNegative)	
-			{
-				for (int i = firstNumIndex; i < numbytes; i++)
-				{
-					int temp = (int)(buffer[i] - 48);
-					if (temp == checkMax[i]) {
-						continue;
-					}
-					else if (temp > checkMax[i]) {
-						printf("\n\n The number is overvalued int");
-						DEBUG('a', "\n The number is overvalued int");
-						machine->WriteRegister(2, number);
-						IncreasePC();
-						delete buffer;
-						return;
-					}
-					else
-						break;
-				}
-			}
-
-			
-			for (int i = firstNumIndex; i < numbytes; i++)
-			{
-				number = number * 10 + (int)(buffer[i] - 48);
-			}
-
-			if (isNegative)
-			{
-				number = number * -1;
-			}
-			machine->WriteRegister(2, number);
-			IncreasePC();
-			delete buffer;
-			return;
 			}
 			case SC_PrintInt: 
 			{
