@@ -1,9 +1,12 @@
 #include "syscall.h"
 
-int main()
-{
+int main() 
+{ 
       //read and write an int
-      int i = ReadInt();
+      int i;
+      PrintString("Enter an integer: ");
+      i = ReadInt();
+      PrintString("You entered: ");
       PrintInt(i);
-      Halt();
-}
+      Halt(); 
+} 
