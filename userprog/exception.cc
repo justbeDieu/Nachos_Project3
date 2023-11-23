@@ -322,7 +322,7 @@ void ExceptionHandler(ExceptionType which)
 			}
 			case SC_PrintChar:
 			{
-				char c = (char)machine->ReadRegister(4); // Doc ki tu tu thanh ghi r4
+				char c = static_cast<char>(machine->ReadRegister(4)); // Doc ki tu tu thanh ghi r4
 				gSynchConsole->Write(&c, 1); // In ky tu tu bien c, 1 byte
 				IncreasePC(); //yeu cau nachos tang program counter
 				break;
