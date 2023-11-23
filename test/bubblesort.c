@@ -7,7 +7,7 @@ int main()
 	int n, i, j, temp;
 	
 	// Nhap so luong phan tu
-	printString("Nhap do dai mang: ");
+	PrintString("Nhap do dai mang: ");
 	n = ReadInt();
 	if (n < 0)
 	{
@@ -38,7 +38,7 @@ int main()
 		}
 	}
 
-	PrintString("Nhap mang:\n");
+	PrintString("In mang:\n");
 	for (int i = 0; i < n; i++)
 	{
 		PrintInt(arr[i]);
