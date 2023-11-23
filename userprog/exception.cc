@@ -26,7 +26,7 @@
 #include "syscall.h"
 #include <string>
 #include <string.h>
-#include "synchconsole.h"
+
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -291,18 +291,18 @@ void ExceptionHandler(ExceptionType which)
 			}
 			case SC_ReadChar:
 			{
-				char input;
+				char* input = new char;
 				do
-					input=kernel->synchConsoleIn->GetChar();
-				while (input=='\n')
-				kernel->machine->WriteRegister(2,input);
+					gSynchConsole->Read(input,1);
+				while ((*input)=='\n')
+				kernel->machine->WriteRegister(2,*input);
 				IncreasePC(); 
 				break;
 			}
 			case SC_PrintChar:
 			{
 				char c = static_cast<char>(machine->ReadRegister(4)); 
-				kernel->synchConsoleOut->PutChar(c);
+				gSynchConsole->Write(&c,1);
 				IncreasePC(); 
 				break;
 			}
