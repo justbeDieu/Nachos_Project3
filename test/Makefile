@@ -79,6 +79,7 @@ help: help.o start.o
 	$(LD) $(LDFLAGS) start.o help.o -o help.coff
 	../bin/coff2noff help.coff help
 
+
 ascii.o: ascii.c
 	$(CC) $(CFLAGS) -c ascii.c
 ascii: ascii.o start.o
