@@ -2,13 +2,18 @@
 #define PTABLE.H
 
 #include "bitmap.h"
-#include "synch.h"
+#include "pcb.h"
+#include "schandle.h"
+#include "semaphore.h"
 
 #define MAX_PROCESS 10
 
 class PTable {
 private:
-    
+    BitMap *bm;
+    PCB *pcbTab[MAX_PROCESS];
+    int psize;
+    Semaphore *bmsem;
 
 public: 
     PTable(int size);           // Initialize
