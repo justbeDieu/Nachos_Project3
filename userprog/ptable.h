@@ -22,6 +22,7 @@ public:
     int ExitUpdate(int ec); 
     int JoinUpdate(int pID); 
     int GetFreeSlot(); 
+    bool IsExist(int pID);
     void Remove(int pID);
 }
 
