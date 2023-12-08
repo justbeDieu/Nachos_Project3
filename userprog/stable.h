@@ -4,7 +4,7 @@
 #include "bitmap.h"  
 #define MAX_LOCK 10  
 
-class Semaphore {
+class Sem {
 private: 
     char name[50]; 
     Semaphore *sem; // Tạo Semaphore để quản lý 
