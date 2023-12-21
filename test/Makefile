@@ -98,6 +98,24 @@ bubblesort: bubblesort.o start.o
 	$(LD) $(LDFLAGS) start.o bubblesort.o -o bubblesort.coff
 	../bin/coff2noff bubblesort.coff bubblesort
 
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
+main: main.o start.o
+	$(LD) $(LDFLAGS) start.o main.o -o main.coff
+	../bin/coff2noff main.coff main
+
+voinuoc.o: voinuoc.c
+	$(CC) $(CFLAGS) -c voinuoc.c
+voinuoc: voinuoc.o start.o
+	$(LD) $(LDFLAGS) start.o voinuoc.o -o voinuoc.coff
+	../bin/coff2noff voinuoc.coff voinuoc
+
+sinhvien.o: sinhvien.c
+	$(CC) $(CFLAGS) -c sinhvien.c
+sinhvien: sinhvien.o start.o
+	$(LD) $(LDFLAGS) start.o sinhvien.o -o sinhvien.coff
+	../bin/coff2noff sinhvien.coff sinhvien
+
 
 string.o: string.c
 	$(CC) $(CFLAGS) -c string.c
