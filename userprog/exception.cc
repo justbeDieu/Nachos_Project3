@@ -132,7 +132,7 @@ void ExceptionHandler(ExceptionType which)
 				int virtualAddr;
 				char* programName;
 				virtualAddr = machine->ReadRegister(4);
-				programName = User2System(virtualAddr, MAX_BUFFER_SIZE);
+				programName = machine->User2System(virtualAddr, MAX_BUFFER_SIZE);
 				OpenFile *file = fileSystem->Open(programName);	
 				if(programName == NULL)
 				{
@@ -589,7 +589,7 @@ void ExceptionHandler(ExceptionType which)
 			{
 				int virtAddr = machine->ReadRegister(4);
 				int semval = machine->ReadRegister(5);
-				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
+				char* name = machine->User2System(virtAddr, MAX_BUFFER_SIZE);
 				if(name == NULL)
 				{
 					DEBUG('a', "Not enough memory to create semaphore\n");
@@ -615,7 +615,7 @@ void ExceptionHandler(ExceptionType which)
 			case SC_Up:
 			{
 				int virtAddr = machine->ReadRegister(4);
-				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
+				char* name = machine->User2System(virtAddr, MAX_BUFFER_SIZE);
 				if(name == NULL)
 				{
 					DEBUG('a', "Not enough memory\n");
@@ -640,7 +640,7 @@ void ExceptionHandler(ExceptionType which)
 			case SC_Down:
 			{
 				int virtAddr = machine->ReadRegister(4);
-				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
+				char* name = machine->User2System(virtAddr, MAX_BUFFER_SIZE);
 				if(name == NULL)
 				{
 					DEBUG('a', "Not enough memory\n");
