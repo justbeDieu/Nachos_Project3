@@ -152,6 +152,7 @@ void ExceptionHandler(ExceptionType which)
 				machine->WriteRegister(2,id);
 				delete[]programName;
 				delete file;
+				IncreasePC();
 				break;
 			}
 			case SC_Join:
@@ -160,6 +161,7 @@ void ExceptionHandler(ExceptionType which)
 				id = machine->ReadRegister(4);
 				exitCode = pTab->JoinUpdate(id);
 				machine->WriteRegister(2, exitCode);
+				IncreasePC();
 				break;
 			}
 			case SC_Exit:
@@ -172,6 +174,7 @@ void ExceptionHandler(ExceptionType which)
 				if (currentThread->space!=NULL)
 					delete currentThread->space;
 				currentThread->Finish();
+				IncreasePC();
 				break;
 			}
 			case SC_ReadInt: 
@@ -584,15 +587,14 @@ void ExceptionHandler(ExceptionType which)
 			}
 			case SC_CreateSemaphore:
 			{
-				int virtAddr, semval;
-				virtAddr = machine->ReadRegister(4);
-				semval = machine->ReadRegister(5);
+				int virtAddr = machine->ReadRegister(4);
+				int semval = machine->ReadRegister(5);
 				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
 				if(name == NULL)
 				{
 					DEBUG('a', "Not enough memory to create semaphore\n");
 					printf("Not enough memory to create semaphore\n");
-					machine->WriteRegister(2, -1); // return -1 in failed case.
+					machine->WriteRegister(2, -1);
 					delete[]name;
 					break;
 				}
@@ -607,6 +609,57 @@ void ExceptionHandler(ExceptionType which)
 				}
 				delete[]name;
 				machine->WriteRegister(2, result);
+				IncreasePC();
+				break;
+			}
+			case SC_Up:
+			{
+				int virtAddr = machine->ReadRegister(4);
+				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
+				if(name == NULL)
+				{
+					DEBUG('a', "Not enough memory\n");
+					printf("Not enough memory\n");
+					machine->WriteRegister(2, -1);
+					delete[]name;
+					break;
+				}
+				int result  = semTab->Signal(name);
+				delete[]name;
+				if (result==-1)
+				{
+					DEBUG('a', "Semaphore not found\n");
+					printf("Semaphore not found\n");
+					machine->WriteRegister(2, result);
+					break;
+				}
+				machine->WriteRegister(2,result);
+				IncreasePC();
+				break;
+			}
+			case SC_Down:
+			{
+				int virtAddr = machine->ReadRegister(4);
+				char* name = User2System(virtAddr, MAX_BUFFER_SIZE);
+				if(name == NULL)
+				{
+					DEBUG('a', "Not enough memory\n");
+					printf("Not enough memory\n");
+					machine->WriteRegister(2, -1);
+					delete[]name;
+					break;
+				}
+				int result  = semTab->Wait(name);
+				delete[]name;
+				if (result==-1)
+				{
+					DEBUG('a', "Semaphore not found\n");
+					printf("Semaphore not found\n");
+					machine->WriteRegister(2, result);
+					break;
+				}
+				machine->WriteRegister(2,result);
+				IncreasePC();
 				break;
 			}
 			default:
