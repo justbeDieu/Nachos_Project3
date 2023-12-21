@@ -19,6 +19,12 @@ Statistics *stats;			// performance metrics
 Timer *timer;				// the hardware timer device,
 					// for invoking context switches
 
+//global multiprogram variable
+Semaphore* addrLock;	
+BitMap* gPhysPageBitMap;	
+PTable* pTab;	
+STable* semTab;
+
 #ifdef FILESYS_NEEDED
 FileSystem  *fileSystem;
 #endif

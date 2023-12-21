@@ -36,6 +36,9 @@
 #define SC_PrintChar    14
 #define SC_ReadString   15
 #define SC_PrintString  16
+#define SC_CreateSemaphore 17
+#define SC_Up           18
+#define SC_Down         19
 
 #ifndef IN_ASM
 
@@ -137,6 +140,9 @@ char ReadChar();
 void PrintChar(char character);
 void ReadString(char buffer[], int length);
 void PrintString(char buffer[]);
+int CreateSemaphore(char* name, int semval);
+int Up(char*name);
+int Down(char* name);
 
 
 #endif /* IN_ASM */
