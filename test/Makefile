@@ -35,7 +35,7 @@ CPP = gcc -E
 INCDIR =-I../userprog -I../threads
 CFLAGS = -G 0 -c $(INCDIR)
 
-all: halt shell matmult sort string char help ascii bubblesort number int ping pong scheduling
+all: halt shell matmult sort string char help ascii bubblesort number int ping pong scheduling main sinhvien voinuoc
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.c > strt.s
