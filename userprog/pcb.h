@@ -1,33 +1,39 @@
 #ifndef PCB_H
 #define PCB_H
 
-#include "thread.h"
 #include "synch.h"
+
+#define PCB_MAXNAMESIZE 50
 
 class PCB {
 private:
-    Semaphore *joinsem;
-    Semaphore *exitsem;
-    Semaphore *mutex;
-    int exitcode;
-    Thread *thread;
-    int pid;
-    int numwait;
-
+    char _filename[PCB_MAXNAMESIZE];
+    Thread* _thread;
+    int _parentID;
+    int _processID;
+    Semaphore* _joinsem;
+    Semaphore* _exitsem;
+    Semaphore* _mutex;
+    int _joinid;
+    int _joinexitcode;
+    int _numwait;
+    int _isExit;
 public:
-    int parentID;
-    PCB(int id);           // Initialize
-    ~PCB();          // De-allocate
-    int Exec(char* filename, int pID);
-    int GetNumWait();
-    void JoinWait();
+    PCB();
+    ~PCB();
+    int Exec(char* filename, int processID, int parentID);    // create and exec a new thread. return 0 if success and -1 if failure
+    void JoinWait(int joinid);
+    void JoinRelease(int joinid, int joinexitcode);
     void ExitWait();
-    void JoinRelease();
     void ExitRelease();
     void IncNumWait();
     void DecNumWait();
-    void SetExitCode(int ec);
-    int GetExitCode();
-}
+    int GetParentID();
+    int GetProcessID();
+    int GetJoinID();
+    int GetJoinExitCode();
+    char* GetFileName();
+    Thread* GetThread();
+};
 
-#endif // PCB_H
+#endif
