@@ -128,3 +128,21 @@ number.o: number.c
 number: number.o start.o
 	$(LD) $(LDFLAGS) start.o number.o -o number.coff
 	../bin/coff2noff number.coff number
+
+ping.o: ping.c
+	$(CC) $(CFLAGS) -c ping.c
+ping: ping.o start.o
+	$(LD) $(LDFLAGS) start.o ping.o -o ping.coff
+	../bin/coff2noff ping.coff ping
+
+pong.o: pong.c
+	$(CC) $(CFLAGS) -c pong.c
+pong: pong.o start.o
+	$(LD) $(LDFLAGS) start.o pong.o -o pong.coff
+	../bin/coff2noff pong.coff pong
+
+scheduling.o: scheduling.c
+	$(CC) $(CFLAGS) -c scheduling  .c
+scheduling: scheduling.o start.o
+	$(LD) $(LDFLAGS) start.o scheduling.o -o scheduling.coff
+	../bin/coff2noff scheduling.coff scheduling  
