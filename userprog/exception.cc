@@ -132,6 +132,35 @@ void ExceptionHandler(ExceptionType which)
 		  	 	interrupt->Halt();
 			    break;
 	        }
+			case SC_Exec:
+			{
+				int virtualAddr;
+				char* programName;
+				virtualAddr = machine->ReadRegister(4);
+				programName = User2System(virtualAddr, MAX_BUFFER_SIZE);
+
+				OpenFile *file = fileSystem->Open(programName);	
+
+				if(programName == NULL)
+				{
+					DEBUG('a',"Not enough memory\n");
+					printf("Not enough memory\n");
+					machine->WriteRegister(2,-1);
+					break;
+				}
+				if(file == NULL)
+				{
+					DEBUG('a',"Cannot open file\n");
+					printf("Cannot open file\n");
+					machine->WriteRegister(2,-1);
+					break;
+				}
+				int id = pTab->ExecUpdate(programName);
+				machine->WriteRegister(2,id);
+				delete[]programName;
+				delete file;
+				break;
+			}
 			case SC_ReadInt: 
 			{
 				char* buffer;

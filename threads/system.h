@@ -15,6 +15,8 @@
 #include "interrupt.h"
 #include "stats.h"
 #include "timer.h"
+#include "ptable.h"
+#include "stable.h"
 
 // Initialization and cleanup routines
 extern void Initialize(int argc, char **argv); 	// Initialization,
@@ -36,10 +38,16 @@ extern Machine* machine;	// user program memory and registers
 extern SynchConsole* gSynchConsole;
 //#endif
 
-#ifdef FILESYS_NEEDED 		// FILESYS or FILESYS_STUB 
+//multiprogram variable, defined in system.cc
+extern Semaphore* addrLock;	
+extern BitMap* gPhysPageBitMap;	
+extern PTable* pTab;	
+extern STable* semTab;
+
+//#ifdef FILESYS_NEEDED 		// FILESYS or FILESYS_STUB 
 #include "filesys.h"
 extern FileSystem  *fileSystem;
-#endif
+//#endif
 
 #ifdef FILESYS
 #include "synchdisk.h"
