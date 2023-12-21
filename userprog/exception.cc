@@ -121,11 +121,6 @@ void ExceptionHandler(ExceptionType which)
 	{
 		switch(type)
 		{
-			case SC_Exit:
-			{
-   	        	Exit(0);
-            	break;
-			}
 			case SC_Halt: 
 			{
 			    DEBUG('a', "Shutdown, initiated by user program.\n");
@@ -159,6 +154,26 @@ void ExceptionHandler(ExceptionType which)
 				machine->WriteRegister(2,id);
 				delete[]programName;
 				delete file;
+				break;
+			}
+			case SC_Join:
+			{
+				int id, exitCode;
+				id = machine->ReadRegister(4);
+				exitCode = pTab->JoinUpdate(id);
+				machine->WriteRegister(2, exitCode);
+				break;
+			}
+			case SC_Exit:
+			{
+				int status = machine->ReadRegister(4);
+				if(status)
+					break;
+				int exitCode = pTab->ExitUpdate(status);
+				machine->WriteRegister(2, exitCode);
+				if (currentThread->space!=NULL)
+					delete currentThread->space;
+				currentThread->Finish();
 				break;
 			}
 			case SC_ReadInt: 
