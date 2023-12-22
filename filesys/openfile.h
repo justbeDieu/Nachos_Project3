@@ -28,6 +28,7 @@
 					// See definitions listed under #else
 class OpenFile {
   public:
+	int type;
     OpenFile(int f) { file = f; currentOffset = 0; }	// open the file
     OpenFile(int f, int t) { file = f; currentOffset = 0; type = t; }
 	~OpenFile() { Close(file); }			// close the file
