@@ -14,23 +14,23 @@ void main()
 	
 	while (1)
 	{
-		Wait("m_vn");
+		Up("m_vn");
 
 		si_result = Open("result.txt", 0);
 		if (si_result == -1)
 		{		
-			Signal("sinhvien");
+			Down("sinhvien");
 			return;
 		}
 		while (1)
 		{
-			Wait("voinuoc");
+			Up("voinuoc");
 			c_readFile = 0;
 			si_voinuoc = Open("voinuoc.txt", 1);
 			if (si_voinuoc == -1)
 			{
 				Close(si_result);
-				Signal("sinhvien");
+				Down("sinhvien");
 
 				return;
 			}
@@ -76,11 +76,11 @@ void main()
 			{
 				v1 = v2 = 0;
 				Close(si_result);
-				Signal("sinhvien");
+				Down("sinhvien");
 				break;
 			}
 
-			Signal("sinhvien");
+			Down("sinhvien");
 		}
 	}
 }
