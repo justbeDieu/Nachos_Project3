@@ -25,17 +25,14 @@ int main()
 	if (f_Success == -1)
 		return 1;
 
-	// Tao file output.txt 
 	f_Success = CreateFile("output.txt");
 	if (f_Success == -1)
 		return 1;
 
-	// Mo file input.txt 
 	si_input = Open("input.txt", 1);
 	if (si_input == -1)
 		return 1;
 
-	// Mo file output.txt 
 	si_output = Open("output.txt", 0);
 	if (si_output == -1)
 	{
@@ -55,6 +52,7 @@ int main()
 		else
 			break;
 	}
+
 
 	f_Success = Exec("./test/sinhvien");
 	if (f_Success == -1)
@@ -105,9 +103,9 @@ int main()
 		}
 		Close(si_sinhvien);
 
-		Down("sinhvien");
+		Up("sinhvien");
 
-		Up("main");
+		Down("main");
 
 		si_result = Open("result.txt", 1);
 		if (si_result == -1)
@@ -136,7 +134,7 @@ int main()
 			{
 				Write("\r\n", 2, si_output);
 				Close(si_result);
-				Down("m_vn");
+				Up("m_vn");
 				break;
 			}
 
@@ -146,7 +144,7 @@ int main()
 			{
 				Write("\r\n", 2, si_output);
 				Close(si_result);
-				Down("m_vn");
+				Up("m_vn");
 				break;
 			}
 
