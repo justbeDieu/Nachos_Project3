@@ -25,14 +25,17 @@ int main()
 	if (f_Success == -1)
 		return 1;
 
+	// Tao file output.txt 
 	f_Success = CreateFile("output.txt");
 	if (f_Success == -1)
 		return 1;
 
+	// Mo file input.txt 
 	si_input = Open("input.txt", 1);
 	if (si_input == -1)
 		return 1;
 
+	// Mo file output.txt 
 	si_output = Open("output.txt", 0);
 	if (si_output == -1)
 	{
@@ -54,6 +57,7 @@ int main()
 	}
 
 
+	// Goi thuc thi tien trinh sinhvien.c
 	f_Success = Exec("./test/sinhvien");
 	if (f_Success == -1)
 	{
@@ -62,6 +66,7 @@ int main()
 		return 1;
 	}
 
+	// Goi thuc thi tien trinh voinuoc.c
 	f_Success = Exec("./test/voinuoc");
 	if (f_Success == -1)
 	{
@@ -72,6 +77,7 @@ int main()
 
 	while (SLTD--)
 	{
+		// Tao file sinhvien.txt
 		f_Success = CreateFile("sinhvien.txt");
 		if (f_Success == -1)
 		{
@@ -80,6 +86,7 @@ int main()
 			return 1;
 		}
 
+		// Mo file sinhvien.txt 
 		si_sinhvien = Open("sinhvien.txt", 0);
 		if (si_sinhvien == -1)
 		{
@@ -101,11 +108,14 @@ int main()
 				break;
 
 		}
+		// Dong file sinhvien.txt 
 		Close(si_sinhvien);
 
-		Signal("sinhvien");
+		// Goi tien trinh sinhvien
+		Down("sinhvien");
 
-		Wait("main");
+		// Tien trinh chinh phai cho 
+		Up("main");
 
 		si_result = Open("result.txt", 1);
 		if (si_result == -1)
@@ -128,13 +138,14 @@ int main()
 			return 1;
 		}
 
+		// Doc cac voi vao output.txt		
 		while (1)
 		{
 			if (Read(&c_readFile, 1, si_sinhvien) < 1)
 			{
 				Write("\r\n", 2, si_output);
 				Close(si_result);
-				Signal("m_vn");
+				Down("m_vn");
 				break;
 			}
 
@@ -144,7 +155,7 @@ int main()
 			{
 				Write("\r\n", 2, si_output);
 				Close(si_result);
-				Signal("m_vn");
+				Down("m_vn");
 				break;
 			}
 
