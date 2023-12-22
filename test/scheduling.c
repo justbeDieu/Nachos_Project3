@@ -1,14 +1,12 @@
 #include "syscall.h"
 
-int main()
+void main()
 {
     int PingPID, PongPID;
-    PrintString("PingPong Test: \n");
+    PrintString("PingPong Testing: \n");
     
     PingPID = Exec("./test/ping");
     PongPID = Exec("./test/pong");
     Join(PingPID);
     Join(PongPID);
-
-    Halt();
 }
