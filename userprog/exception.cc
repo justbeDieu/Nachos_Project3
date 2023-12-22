@@ -28,6 +28,7 @@
 #include <string.h>
 #define MAX_INT32_LENGTH 512 
 #define MAX_BUFFER_SIZE	512
+#define MaxFileLength 32
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -502,7 +503,7 @@ void ExceptionHandler(ExceptionType which)
 				buf = machine->User2System(virtAddr, charcount); 
 				
 				if (fileSystem->openf[id]->type == 2)
-				{`
+				{
 					int size = gSynchConsole->Read(buf, charcount); 
 					machine->System2User(virtAddr, size, buf); 
 					machine->WriteRegister(2, size); 
