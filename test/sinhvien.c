@@ -11,26 +11,27 @@ void main()
 	int lengthFile;		
 	int i_File;		
 
-	Signal("m_vn");
+	Down("m_vn");
 
 	while (1)
 	{
 		lengthFile = 0;
 
-		Wait("sinhvien");
+		Up("sinhvien");
 
 
 		f_Success = CreateFile("result.txt");
 		if (f_Success == -1)
 		{
-			Signal("main"); 
+			Down("main"); 
 			return;
 		}
 
+		// Mo file sinhvien.txt 
 		si_sinhvien = Open("sinhvien.txt", 1);
 		if (si_sinhvien == -1)
 		{
-			Signal("main"); 
+			Down("main"); 
 			return;
 		}
 
@@ -42,7 +43,7 @@ void main()
 		if (f_Success == -1)
 		{
 			Close(si_sinhvien);
-			Signal("main"); 
+			Down("main"); 
 			return;
 		}
 
@@ -51,7 +52,7 @@ void main()
 		if (si_voinuoc == -1)
 		{
 			Close(si_sinhvien);
-			Signal("main"); 
+			Down("main"); 
 			return;
 		}
 
@@ -77,22 +78,24 @@ void main()
 			if (flag_VN == 1)
 			{
 				Close(si_voinuoc);
-				Signal("voinuoc");
-				Wait("sinhvien");
+				Down("voinuoc");
+				Up("sinhvien");
 
+				// Tao file voinuoc.txt
 				f_Success = CreateFile("voinuoc.txt");
 				if (f_Success == -1)
 				{
 					Close(si_sinhvien);
-					Signal("main");
+					Down("main");
 					return;
 				}
+
 
 				si_voinuoc = Open("voinuoc.txt", 0);
 				if (si_voinuoc == -1)
 				{
 					Close(si_sinhvien);
-					Signal("main"); 
+					Down("main"); 
 					return;
 				}
 
@@ -100,6 +103,6 @@ void main()
 			i_File++;
 
 		}
-		Signal("main");
+		Down("main");
 	}
 }
