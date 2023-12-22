@@ -142,7 +142,7 @@ pong: pong.o start.o
 	../bin/coff2noff pong.coff pong
 
 scheduling.o: scheduling.c
-	$(CC) $(CFLAGS) -c scheduling  .c
+	$(CC) $(CFLAGS) -c scheduling.c
 scheduling: scheduling.o start.o
 	$(LD) $(LDFLAGS) start.o scheduling.o -o scheduling.coff
 	../bin/coff2noff scheduling.coff scheduling  
