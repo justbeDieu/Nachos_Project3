@@ -28,10 +28,16 @@
 					// See definitions listed under #else
 class OpenFile {
   public:
-	int type;
+    int type;
     OpenFile(int f) { file = f; currentOffset = 0; }	// open the file
     OpenFile(int f, int t) { file = f; currentOffset = 0; type = t; }
-	~OpenFile() { Close(file); }			// close the file
+    ~OpenFile() { Close(file); }			// close the file
+    
+    int Seek(int pos) {
+		Lseek(file, pos, 0);
+		currentOffset = Tell(file);
+		return currentOffset;
+	}
 
     int ReadAt(char *into, int numBytes, int position) { 
     		Lseek(file, position, 0); 
