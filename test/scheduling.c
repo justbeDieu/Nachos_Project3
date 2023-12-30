@@ -3,7 +3,7 @@
 void main()
 {
     int PingPID, PongPID;
-    PrintString("PingPong test starting...: \n");
+    PrintString("PingPong test starting...\n");
     
     PingPID = Exec("./test/ping");
     PongPID = Exec("./test/pong");
